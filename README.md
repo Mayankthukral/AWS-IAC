@@ -24,7 +24,7 @@ The project structure is organized as follows:
   - .gitignore
   - README.md
 
-### breif overview of files 
+## Breif overview of files 
 
 - `main.tf`: Contains the main configuration for provisioning AWS infrastructure and calls the child modules for example VPC,subnet.
 - `variables.tf`: Defines input variables used in the main configuration and modules.
@@ -37,7 +37,7 @@ The project structure is organized as follows:
 - `.gitignore`: Excludes sensitive or generated files from version control.
 - `README.md`: This file providing an overview of the Terraform project.
 
-#### Usage
+## Usage
  Clone the repository:
    
    git clone https://github.com/your-username/terraform-project.git # Clone the Git repository to your local machine
@@ -53,13 +53,13 @@ The project structure is organized as follows:
    terraform apply random # Apply the generated execution plan to create or update resources
 
 
-##### Variable naming convention inside module (Snake Case)
+## Variable naming convention inside module (Snake Case)
 var.resource_name_attribute_name
 for example: var.subnet_vpc_id
 
-###### default value to be defined inside module 
+## default value to be defined inside module 
 sample_resourcename 
 for example: sample_subnet
 
-# Variable naming convention calling in Parent module
+## Variable naming convention calling in Parent module
 var.env_resource_name_attribute_name
