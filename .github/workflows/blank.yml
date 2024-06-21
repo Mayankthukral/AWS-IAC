@@ -1,0 +1,59 @@
+# Name of the GitHub Actions workflow and its purpose
+name: Validate Terraform Configuration
+
+# Triggers for the workflow (when to run the workflow)
+on:
+  push:
+    branches:
+      - validate  # Run this workflow when code is pushed to the 'validate' branch
+
+jobs:
+  build:
+    # Operating system to run the job on
+    runs-on: ubuntu-latest
+
+    # Environment variables for the job
+    env:
+      TF_WORKING_DIR: ${{ github.workspace }}/terraform  # Set the Terraform working directory
+
+    # Steps to execute in the job
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Use Node.js version 14
+
+      # Step 3: Install unzip
+      - name: Install unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+
+      # Step 4: Setup Terraform and authenticate
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: '1.0.0'  # Use Terraform version 1.0.0
+          terraform_wrapper: false  # Disable Terraform wrapper
+          cli_config_credentials_token: ${{ secrets.TFC_TOKEN_ID}}  # Use Terraform Cloud token for authentication
+
+      # Step 5: Initialize Terraform in the specified directory
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ${{ env.TF_WORKING_DIR }}  # Use the Terraform working directory
+
+      # Step 6: Validate Terraform configuration
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ${{ env.TF_WORKING_DIR }}  # Use the Terraform working directory
+
+      # Step 7: Check Terraform validation status and exit if validation fails
+      - name: Terraform Plan Status
+        if: steps.validate.outcome == 'failure'  # If the validation step fails
+        run: exit 1  # Exit the workflow with an error code
+
