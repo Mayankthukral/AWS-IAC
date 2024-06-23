@@ -1,4 +1,4 @@
-# Name of the GitHub Actions workflow and its purpose
+# Workflow for validating Terraform configuration
 name: Validate Terraform Configuration
 
 # Triggers for the workflow (when to run the workflow)
