@@ -5,8 +5,8 @@ terraform {
   # Defines the required Terraform providers and their versions
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.7"  # Requires AWS provider version 4.7 or newer
+      source = "hashicorp/aws"
+      version = "5.55.0"  # Requires AWS provider version 4.7 or newer
     }
   }
 
@@ -20,4 +20,8 @@ terraform {
       name = "validate_terraform"  # Name of the workspace
     }
   }
+}
+
+provider "aws" {
+  region = "ca-central-1"
 }
