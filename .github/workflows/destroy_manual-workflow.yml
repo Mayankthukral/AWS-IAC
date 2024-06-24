@@ -1,0 +1,32 @@
+name: Manual Workflow to deprovision resources present in state file
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Destroy_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step to check out the repository's code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step to set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with: 
+          node-version: '14'
+
+      # Step to set up Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+          cli_config_credentials_token: ${{ secrets.TFC_TOKEN_ID }}
+
+      - name: Destroy resources
+        run: |
+          cd ${{ github.workspace }}/terraform
+          terraform init
+          terraform destroy -auto-approve
