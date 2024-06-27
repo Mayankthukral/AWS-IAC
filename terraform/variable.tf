@@ -1,22 +1,74 @@
-# Define a variable for the VPC CIDR block
-variable "env_vpc_cidr" {
-  description = "CIDR block for the VPC" # Description for the variable
-  default = "10.0.0.0/16"                # Default CIDR block for the VPC
+variable "env_vpc_cidr_block" {
+  description = "CIDR block for the VPC"
+  type        = string
 }
 
-# Define a variable for the VPC name
 variable "env_vpc_name" {
-  description = "Name of the VPC"        # Description for the variable
-  default = "sample_vpc"                 # Default name for the VPC
+  description = "Name for the VPC"
+  type        = string
 }
 
-# Define a variable for the subnet CIDR block
-variable "env_subnet_cidr_block" {
-  default = "10.0.0.0/24"                # Default CIDR block for the subnet, provides 251 usable IP addresses
-}
-
-# Define a variable for the subnet name
 variable "env_subnet_name" {
-  default = "sample_subnet"              # Default name for the subnet
+  description = "Base name for subnets"
+  type        = string
 }
 
+variable "env_nat_gateway_name" {
+  description = "Name for the NAT gateway"
+  type        = string
+}
+
+variable "env_route_table_public_name" { }
+variable "env_route_table_private_name" { }
+
+
+variable "env_launch_configuration_name" {
+  description = "Name for the launch configuration"
+  type        = string
+}
+
+variable "env_launch_configuration_ami_id" {
+  description = "AMI ID for the launch configuration"
+  type        = string
+}
+
+variable "env_launch_configuration_instance_type" {
+  description = "Instance type for the launch configuration"
+  type        = string
+}
+
+
+
+variable "env_autoscaling_group_min_size" {
+  description = "Minimum size for the autoscaling group"
+  type        = number
+}
+
+variable "env_autoscaling_group_max_size" {
+  description = "Maximum size for the autoscaling group"
+  type        = number
+}
+
+variable "env_autoscaling_group_desired_capacity" {
+  description = "Desired capacity for the autoscaling group"
+  type        = number
+}
+
+variable "env_autoscaling_group_name" {
+  description = "Name for the autoscaling group"
+  type        = string
+}
+
+variable "env_instance_security_group_name" {
+  description = "name of application load balancer security group name"
+  type = string
+}
+
+variable "env_alb_security_group_name" {
+  description = "name of autoscalling instance security group name"
+  type = string
+}
+
+variable "env_key_name" {
+  type = string
+}
