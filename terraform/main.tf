@@ -68,12 +68,10 @@ module "auto_scaling" {
 module "alb" {
   source = "./module/alb"
   alb_name                               = var.env_alb_name
-  alb_subnets                            = var.env_alb_subnets
-  alb_security_groups_id                 = var.env_alb_security_groups_id
+  alb_subnets                            = module.subnet.module_public_subnet_ids[*]
+  alb_security_groups_id                 = module.security_groups.alb_security_group_id
   alb_target_group_name                  = var.env_alb_target_group_name
-  alb_target_group_vpc_id                = var.env_alb_target_group_vpc_id
-  alb_listner_alb_arn                    = var.env_alb_listner_alb_arn
-  alb_listner_target_group_arn           = var.env_alb_listner_target_group_arn
+  alb_target_group_vpc_id                = module.vpc.module_vpc_id
   target_group_attach_autoscale_name     = var.env_target_group_attach_autoscale_name
   target_group_attach_alb_target_group_arn = var.env_target_group_attach_alb_target_group_arn
 }
