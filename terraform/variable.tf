@@ -72,3 +72,39 @@ variable "env_alb_security_group_name" {
 variable "env_key_name" {
   type = string
 }
+
+variable "env_alb_name" {
+  description = "The name of the Application Load Balancer"
+  type        = string
+}
+
+variable "env_alb_subnets" {
+  description = "The subnets for the Application Load Balancer"
+  type        = list(string)
+}
+
+variable "env_alb_security_groups_id" {
+  description = "The security groups for the Application Load Balancer"
+  type        = list(string)
+}
+
+variable "env_alb_target_group_name" {
+  description = "The name of the target group for the Application Load Balancer"
+  type        = string
+}
+
+variable "env_alb_target_group_vpc_id" {
+  description = "The VPC ID for the target group"
+  type        = string
+}
+
+
+variable "env_target_group_attach_autoscale_name" {
+  description = "The name of the Auto Scaling group to attach to the target group"
+  type        = string
+}
+
+variable "env_target_group_attach_alb_target_group_arn" {
+  description = "The ARN of the ALB target group to attach the Auto Scaling group"
+  type        = string
+}
