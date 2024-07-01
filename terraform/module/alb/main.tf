@@ -51,5 +51,5 @@ resource "aws_lb_listener" "alb_listner" {
 # Create a new ALB Target Group attachment
 resource "aws_autoscaling_attachment" "target_group_attach" {
   autoscaling_group_name = var.target_group_attach_autoscale_name
-  lb_target_group_arn    = var.target_group_attach_alb_target_group_arn
+  lb_target_group_arn    = aws_lb_target_group.alb_target_group.arn
 }
