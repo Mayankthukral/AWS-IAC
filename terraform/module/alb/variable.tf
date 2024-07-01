@@ -23,22 +23,10 @@ variable "alb_target_group_vpc_id" {
   type        = string
 }
 
-variable "alb_listner_alb_arn" {
-  description = "The ARN of the ALB."
-  type        = string
-}
-
-variable "alb_listner_target_group_arn" {
-  description = "The ARN of the target group for the ALB listener."
-  type        = string
-}
 
 variable "target_group_attach_autoscale_name" {
   description = "The name of the Auto Scaling group to attach to the target group."
   type        = string
 }
 
-variable "target_group_attach_alb_target_group_arn" {
-  description = "The ARN of the ALB target group for the Auto Scaling group attachment."
-  type        = string
-}
+
