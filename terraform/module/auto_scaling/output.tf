@@ -7,3 +7,7 @@ output "autoscaling_group_id" {
   description = "ID of the Auto Scaling group"
   value       = aws_autoscaling_group.main.id
 }
+
+output "autoscaling_group_name" {
+  value = aws_autoscaling_group.main.name
+}
