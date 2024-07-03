@@ -6,12 +6,31 @@ resource "aws_launch_configuration" "main" {
   instance_type = var.launch_configuration_instance_type
   key_name      = var.launch_configuration_key_name
   
-
   security_groups = var.launch_configuration_security_group_ids
+  enable_monitoring = true
+   user_data = <<-EOF
+    #!/bin/bash
+    # Update the package index
+    sudo apt-get update
+    
+    # Install Nginx
+    sudo apt-get install -y nginx
+
+    # Start Nginx service
+    sudo systemctl start nginx
+
+    # Enable Nginx to start on boot
+    sudo systemctl enable nginx
+
+    # Optional: Custom Nginx configuration or HTML content
+    echo "Welcome to Nginx on AWS" > /var/www/html/index.html
+  EOF
+
 
   lifecycle {
     create_before_destroy = true
-  }
+  
+}
 }
 
 resource "aws_autoscaling_group" "main" {
