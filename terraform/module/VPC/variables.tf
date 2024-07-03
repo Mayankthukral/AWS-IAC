@@ -5,7 +5,7 @@ variable "vpc_name" {
 }
 
 # Variable for the VPC CIDR block
-variable "VPC_CIDR_Block" {
+variable "vpc_cidr_block" {
   description = "CIDR block for the VPC"  # Description for the VPC CIDR block variable
   default = "10.0.0.0/16"                  # Default CIDR block for the VPC
 }
