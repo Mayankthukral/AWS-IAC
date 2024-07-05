@@ -24,6 +24,18 @@ resource "aws_launch_configuration" "main" {
 
     # Optional: Custom Nginx configuration or HTML content
     echo "Welcome to Nginx on AWS" > /var/www/html/index.html
+
+    # Install CloudWatch Logs agent
+    wget https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py
+    sudo python ./awslogs-agent-setup.py -n -r ca-central-1 -c /tmp/awslogs.conf
+
+    # Start the CloudWatch Logs agent
+    sudo service awslogs start
+    sudo chkconfig awslogs on
+
+    # Optional: Custom Nginx configuration or HTML content
+    echo "Welcome to Nginx on AWS" > /var/www/html/index.html
+  
   EOF
 
 
